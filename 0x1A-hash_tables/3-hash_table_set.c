@@ -1,7 +1,7 @@
 #include "hash_tables.h"
 
 /**
- * hash_table_set - Adds an element in a hash table.
+ * hash_table_set - Add an element in a hash table.
  * @ht: pointer to the hash table.
  * @key: key to add
  * @value: value associated with key.
@@ -13,7 +13,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	hash_node_t *new;
 	char *value_copy;
-	unsigned long int index, x;
+	unsigned long int index, j;
 
 	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
 		return (0);
@@ -23,12 +23,12 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		return (0);
 
 	index = key_index((const unsigned char *)key, ht->size);
-	for (x = index; ht->array[x]; x++)
+	for (j = index; ht->array[j]; j++)
 	{
-		if (strcmp(ht->array[x]->key, key) == 0)
+		if (strcmp(ht->array[j]->key, key) == 0)
 		{
-			free(ht->array[x]->value);
-			ht->array[x]->value = value_copy;
+			free(ht->array[j]->value);
+			ht->array[j]->value = value_copy;
 			return (1);
 		}
 	}
